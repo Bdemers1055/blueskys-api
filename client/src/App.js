@@ -7,7 +7,7 @@ class App extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        currentRain: {},
+        forecast: {},
         success: false,
         error: null,
       };
@@ -46,7 +46,7 @@ class App extends Component {
         </p> */}
         <button type="button" onClick={this.fetchForecast.bind(this)}>get forecast</button>
         <section>
-        <div className="currentRainCard">{forecast.precipProbability}</div>
+        <div className="forecastCard">{forecast.currently ?forecast.currently.precipProbability:null}</div>
       </section>
       </div>
     );
