@@ -37,7 +37,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <h1 className="App-title">Forecast</h1>
+          <h1 className="App-title">Rain Check</h1>
         </header>
         {/* <p className="App-intro">
           <input className="latInput" type="text"></input>
@@ -46,7 +46,12 @@ class App extends Component {
         </p> */}
         <button type="button" onClick={this.fetchForecast.bind(this)}>get forecast</button>
         <section>
+          <h1>Current Rain Status</h1>
         <div className="forecastCard">{forecast.currently ?forecast.currently.precipProbability:null}</div>
+        <h1>Probability of rain in the next hour</h1>
+        <div className="forecastCard">{forecast.hourly ?forecast.hourly.data[1].precipProbability:null}</div>
+        <h1>Probability of rain tomorrow</h1>
+        <div className="forecastCard">{forecast.daily ?forecast.daily.data[1].precipProbability:null}</div>
       </section>
       </div>
     );
