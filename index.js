@@ -38,9 +38,9 @@ server.get('/forecast/location/:lat,:lon', (request, response) => {
 });
 
 // googlemaps route ...
-server.get('/forecast/location/:city/:state', (request, response) => {
-    const { city, state } = request.params;
-    const requestUrl = (googleurl + `${city},${state}`);
+server.get('/forecast/location/address/:address', (request, response) => {
+    const { address } = request.params;
+    const requestUrl = (googleurl + `${address}`);
     console.log(requestUrl)
     axios.get(requestUrl)
          .then(address => {

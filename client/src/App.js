@@ -23,6 +23,21 @@ class App extends Component {
               address: e.target.value
           });
       }
+      fetchGeolocation(){
+        const address = this.state.address;
+        const url = `http://localhost:9009/forecast/location/address/${address}`;
+        axios.get(url).then((response) => {
+            this.setState({
+                geolocation: response.data,
+                success: true,
+            });
+        }).catch((error) => {
+            this.setState({
+                success: false,
+                error,
+            });
+      });
+      } 
       fetchForecast(){
         const lat = 29.1;
         const lon = -82;
@@ -58,7 +73,9 @@ class App extends Component {
                onChange={this.displayAddress.bind(this)}
               />
                 <button type="button" onClick={this.displayAddress.bind(this)}>display Address</button>
+                <button type="button" onClick={this.fetchGeolocation.bind(this)}>fetch Geolocation</button>
                 <div>{this.state.address}</div>
+                <pre>{JSON.stringify(this.state.geolocation,null,4)}</pre>
         <button type="button" onClick={this.fetchForecast.bind(this)}>get forecast</button>
         <section>
           <h1>Current Rain Status</h1>
