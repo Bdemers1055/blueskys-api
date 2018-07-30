@@ -9,8 +9,7 @@ class App extends Component {
       this.state = {
         city: {},
         st: {},
-        address: {},
-
+        address: '',
         forecast: {},
         success: false,
         error: null,
@@ -19,20 +18,11 @@ class App extends Component {
       componentDidMount(){
         this.fetchForecast();
       }
-      fetchAddress(){
-        const address = this.state;
-        axios.get(url).then((response) => {
-            this.setState({
-                address: response.data,
-                success: true,
-            });
-        }).catch((error) => {
-            this.setState({
-                success: false,
-                error,
-            });
-      });
-    }
+      displayAddress(e){
+          this.setState({
+              address: e.target.value
+          });
+      }
       fetchForecast(){
         const lat = 29.1;
         const lon = -82;
@@ -62,9 +52,13 @@ class App extends Component {
           <input  className="lonInput" type="text"></input>
           <button>Go</button>
         </p> */}
-        <input className="address" type="text"></input>
-                <button type="button" onClick={this.fetchAddress.bind(this)}>display Address</button>
-                <div>{address.data}</div>
+        <input className="address" 
+               type="text" 
+               value={this.state.address}
+               onChange={this.displayAddress.bind(this)}
+              />
+                <button type="button" onClick={this.displayAddress.bind(this)}>display Address</button>
+                <div>{this.state.address}</div>
         <button type="button" onClick={this.fetchForecast.bind(this)}>get forecast</button>
         <section>
           <h1>Current Rain Status</h1>
