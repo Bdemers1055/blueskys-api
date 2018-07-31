@@ -16,7 +16,8 @@ class App extends Component {
         error: null,
       };
     }
-      componentDidMount(){
+      fetchGeolocationAndForecast(){
+        this.fetchGeolocation();
         this.fetchForecast();
       }
       displayAddress(e){
@@ -58,28 +59,27 @@ class App extends Component {
       });
       }      
   render() {
-    const { success, error, forecast } = this.state;
+    const { forecast } = this.state;
     return (
       <div className="App">
         <header className="App-header">
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <h1 className="App-title">Rain Check</h1>
-        </header>
-        {/* <p className="App-intro">
-          <input className="latInput" type="text"></input>
-          <input  className="lonInput" type="text"></input>
-          <button>Go</button>
-        </p> */}
-        <input className="address" 
-               type="text" 
+          <h1 className="App-title">CHANCE OF RAIN</h1>
+          <input className="address" 
+               type="text"
+               placeholder="City, State" 
                value={this.state.address}
-               onChange={this.displayAddress.bind(this)}
-              />
-                <button type="button" onClick={this.displayAddress.bind(this)}>display Address</button>
-                <button type="button" onClick={this.fetchGeolocation.bind(this)}>fetch Geolocation</button>
-                <div>{this.state.address}</div>
-                <div>{this.state.lat},{this.state.lng}</div>
-        <button type="button" onClick={this.fetchForecast.bind(this)}>get forecast</button>
+               onChange={this.displayAddress.bind(this)}/>
+        <button type="button" onClick={this.fetchGeolocationAndForecast.bind(this)}>CHECK RAIN FORECAST</button>
+        </header>
+        {/* <section>
+        <input className="address" 
+               type="text"
+               placeholder="City, State" 
+               value={this.state.address}
+               onChange={this.displayAddress.bind(this)}/>
+        <button type="button" onClick={this.fetchGeolocationAndForecast.bind(this)}>CHECK RAIN FORECAST</button>
+        </section> */}
         <section>
           <h1>Current Rain Status</h1>
         <div className="forecastCard">{forecast.currently ?forecast.currently.precipProbability:null}</div>
