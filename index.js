@@ -23,9 +23,9 @@ server.use(cors());
 server.use(helmet());
 
 // darksky forecast route ...
-server.get('/forecast/location/:lat,:lon', (request, response) => {
-    const { lat, lon } = request.params;
-    const requestUrl = urlFormatter.resolve(url, `${lat},${lon}`);
+server.get('/forecast/location/:lat,:lng', (request, response) => {
+    const { lat, lng } = request.params;
+    const requestUrl = urlFormatter.resolve(url, `${lat},${lng}`);
     axios.get(requestUrl)
          .then(weather => {
              response.status(200).json(weather.data);

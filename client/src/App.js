@@ -7,9 +7,10 @@ class App extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        city: {},
-        st: {},
+        lat: 0,
+        lng: 0,
         address: '',
+        geolocation: '',
         forecast: {},
         success: false,
         error: null,
@@ -29,6 +30,8 @@ class App extends Component {
         axios.get(url).then((response) => {
             this.setState({
                 geolocation: response.data,
+                lat: response.data.results[0].geometry.location.lat,
+                lng: response.data.results[0].geometry.location.lng, 
                 success: true,
             });
         }).catch((error) => {
@@ -39,9 +42,9 @@ class App extends Component {
       });
       } 
       fetchForecast(){
-        const lat = 29.1;
-        const lon = -82;
-        const url = `http://localhost:9009/forecast/location/${lat},${lon}`;
+        const lat = this.state.lat;
+        const lng = this.state.lng;
+        const url = `http://localhost:9009/forecast/location/${lat},${lng}`;
         axios.get(url).then((response) => {
             this.setState({
                 forecast: response.data,
@@ -75,7 +78,7 @@ class App extends Component {
                 <button type="button" onClick={this.displayAddress.bind(this)}>display Address</button>
                 <button type="button" onClick={this.fetchGeolocation.bind(this)}>fetch Geolocation</button>
                 <div>{this.state.address}</div>
-                <pre>{JSON.stringify(this.state.geolocation,null,4)}</pre>
+                <div>{this.state.lat},{this.state.lng}</div>
         <button type="button" onClick={this.fetchForecast.bind(this)}>get forecast</button>
         <section>
           <h1>Current Rain Status</h1>
