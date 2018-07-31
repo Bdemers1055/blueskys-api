@@ -42,6 +42,9 @@ class App extends Component {
             });
       });
       } 
+      displayForecastSection(){
+          
+      }
       fetchForecast(){
         const lat = this.state.lat;
         const lng = this.state.lng;
@@ -64,29 +67,28 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <h1 className="App-title">CHANCE OF RAIN</h1>
+          <h1 className="App-title">Check for Rain</h1>
           <input className="address" 
                type="text"
-               placeholder="City, State" 
+               placeholder="Search by address" 
                value={this.state.address}
                onChange={this.displayAddress.bind(this)}/>
         <button type="button" onClick={this.fetchGeolocationAndForecast.bind(this)}>CHECK RAIN FORECAST</button>
         </header>
-        {/* <section>
-        <input className="address" 
-               type="text"
-               placeholder="City, State" 
-               value={this.state.address}
-               onChange={this.displayAddress.bind(this)}/>
-        <button type="button" onClick={this.fetchGeolocationAndForecast.bind(this)}>CHECK RAIN FORECAST</button>
-        </section> */}
-        <section>
-          <h1>Current Rain Status</h1>
-        <div className="forecastCard">{forecast.currently ?forecast.currently.precipProbability:null}</div>
-        <h1>Probability of rain in the next hour</h1>
-        <div className="forecastCard">{forecast.hourly ?forecast.hourly.data[1].precipProbability:null}</div>
-        <h1>Probability of rain tomorrow</h1>
-        <div className="forecastCard">{forecast.daily ?forecast.daily.data[1].precipProbability:null}</div>
+        <section className="forecastSection">
+        <div className="forecastCard">
+        <h1>{forecast.currently ?forecast.currently.precipProbability:0.0}</h1>
+        <p className="label">Current</p>
+        </div>
+        
+        <div className="forecastCard">
+        <h1>{forecast.hourly ?forecast.hourly.data[1].precipProbability:0.0}</h1>
+        <p className="label">Next Hour</p>
+        </div>
+        <div className="forecastCard">
+        <h1>{forecast.daily ?forecast.daily.data[1].precipProbability:0.0}</h1>
+        <p className="label">Tomorrow</p>
+        </div>
       </section>
       </div>
     );
