@@ -16,7 +16,9 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server:start": "nodemon index.js"
+    "server:start": "nodemon index.js",
+    "heroku-postbuild": "npm run build",
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",

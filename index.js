@@ -21,6 +21,7 @@ const helmet = require('helmet');
 //add the middleware (power ups)
 server.use(cors());
 server.use(helmet());
+server.use(express.static('client/build'));
 
 // darksky forecast route ...
 server.get('/forecast/location/:lat,:lng', (request, response) => {

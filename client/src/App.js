@@ -29,7 +29,7 @@ class App extends Component {
       }
       fetchGeolocation(){
         const address = this.state.address;
-        const url = `http://localhost:9009/forecast/location/address/${address}`;
+        const url = `/forecast/location/address/${address}`;
         axios.get(url).then((response) => {
             this.setState({
                 geolocation: response.data,
@@ -52,7 +52,7 @@ class App extends Component {
       fetchForecast(){
         const lat = this.state.lat;
         const lng = this.state.lng;
-        const url = `http://localhost:9009/forecast/location/${lat},${lng}`;
+        const url = `/forecast/location/${lat},${lng}`;
         axios.get(url).then((response) => {
             this.setState({
                 forecast: response.data,
