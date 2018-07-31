@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  height: 100vh;
+  padding: 5%;
+  background-color: lightseagreen;
+  width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.App-header {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+h1 {
+  opacity: .4;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 1.0rem;
+}
+
+input, button {
+  outline: none;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  height: 50px;
+  font-size: 1.5rem;
+  background-color: rgb(232, 232, 232);
+  border: solid 2px lightgray;
+  padding: .4rem;
+  color: darkgray;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+input {
+  width: 70%;
+}
+button {
+  width: 60%;
+  text-transform: uppercase;
+  font-size: .8rem;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  background-color: teal;
+}
+button:hover {
+  transition: ease-in-out, .2s;
+  background-color: rgb(14, 82, 82);
+}
+
+section {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.App-title {
+  text-align: center;
+}
+
+.forecastCard {
+  margin-left: 5px;
+  border: 1px solid lightgray;
+  text-align: center;
+  display: inline-block;
+  width: 31%;
+}
+.forecastCard h1 {
+  font-size: 3rem;
+}
+
+.label {
+  margin-bottom:0;
+  line-height: 3.0;
+ background-color: lightgray;
+ opacity: .5;
+}
+

@@ -12,20 +12,20 @@ const port = process.env.PORT || 9009;
 // define base url for darksky
 const apikey = process.env.API_KEY;
 const url = `https://api.darksky.net/forecast/${apikey}/`;
+const googleurl = `https://maps.googleapis.com/maps/api/geocode/json?address=`;
 
 //import middleware (power ups)
 const cors = require('cors');
+const helmet = require('helmet');
 
 //add the middleware (power ups)
 server.use(cors());
+server.use(helmet());
 
-// routes and stuff ...
-server.get('/forecast/location/:lat,:lon', (request, response) => {
-    const { lat, lon } = request.params;
-    // !longhand version
-    // const lat = request.params.lat; 
-    // const lon = request.params.lon;
-    const requestUrl = urlFormatter.resolve(url, `${lat},${lon}`);
+// darksky forecast route ...
+server.get('/forecast/location/:lat,:lng', (request, response) => {
+    const { lat, lng } = request.params;
+    const requestUrl = urlFormatter.resolve(url, `${lat},${lng}`);
     axios.get(requestUrl)
          .then(weather => {
              response.status(200).json(weather.data);
@@ -33,6 +33,23 @@ server.get('/forecast/location/:lat,:lon', (request, response) => {
          .catch(error => {
              response.status(500).json ({ 
                  msg: "don't look now, but there is a TORNADO behind you!!"
+                });
+         });
+});
+
+// googlemaps route ...
+server.get('/forecast/location/address/:address', (request, response) => {
+    const { address } = request.params;
+    const requestUrl = (googleurl + `${address}`);
+    console.log(requestUrl)
+    axios.get(requestUrl)
+         .then(address => {
+             console.log(address)
+             response.status(200).json(address.data);
+         })
+         .catch(error => {
+             response.status(500).json ({ 
+                 msg: "address not found"
                 });
          });
 });
