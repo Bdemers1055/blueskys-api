@@ -24,6 +24,7 @@ h1 {
 }
 
 input, button {
+  outline: none;
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -54,13 +55,13 @@ button:hover {
 }
 
 section {
-  width: 90%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.forecastSection {
-  display: none;
+.App-title {
+  text-align: center;
 }
 
 .forecastCard {
@@ -68,7 +69,7 @@ section {
   border: 1px solid lightgray;
   text-align: center;
   display: inline-block;
-  width: 30%;
+  width: 31%;
 }
 .forecastCard h1 {
   font-size: 3rem;

@@ -7,6 +7,7 @@ class App extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        appearance: 'none',
         lat: 0,
         lng: 0,
         address: '',
@@ -19,6 +20,7 @@ class App extends Component {
       fetchGeolocationAndForecast(){
         this.fetchGeolocation();
         this.fetchForecast();
+        this.displayForecastSection();
       }
       displayAddress(e){
           this.setState({
@@ -43,7 +45,9 @@ class App extends Component {
       });
       } 
       displayForecastSection(){
-          
+          this.setState({
+            appearance: 'block'
+          });
       }
       fetchForecast(){
         const lat = this.state.lat;
@@ -62,20 +66,22 @@ class App extends Component {
       });
       }      
   render() {
+    const styles = { display: this.state.appearance };
     const { forecast } = this.state;
     return (
       <div className="App">
         <header className="App-header">
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <h1 className="App-title">Check for Rain</h1>
+          <h1 className="App-title">Check the propability of rain in your area</h1>
           <input className="address" 
                type="text"
                placeholder="Search by address" 
                value={this.state.address}
                onChange={this.displayAddress.bind(this)}/>
-        <button type="button" onClick={this.fetchGeolocationAndForecast.bind(this)}>CHECK RAIN FORECAST</button>
+        <button type="button" onClick={this.fetchGeolocationAndForecast.bind(this)}>CHECK FOR RAIN</button>
         </header>
-        <section className="forecastSection">
+        <section className="forecastSection" style = { styles }>
+        <h1 className="App-title">Chances of Rain</h1>
         <div className="forecastCard">
         <h1>{forecast.currently ?forecast.currently.precipProbability:0.0}</h1>
         <p className="label">Current</p>
