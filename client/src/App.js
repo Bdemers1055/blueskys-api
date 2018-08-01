@@ -58,6 +58,7 @@ class App extends Component {
                 forecast: response.data,
                 success: true,
             });
+            window.forecast = response.data;
         }).catch((error) => {
             this.setState({
                 success: false,
@@ -83,16 +84,16 @@ class App extends Component {
         <section className="forecastSection" style = { styles }>
         <h1 className="App-title">Chances of Rain</h1>
         <div className="forecastCard">
-        <h1>{forecast.currently ?forecast.currently.precipProbability:0.0}</h1>
+        <h1>{forecast.currently ?forecast.currently.precipProbability * 100 :0.0}%</h1>
         <p className="label">Current</p>
         </div>
         
         <div className="forecastCard">
-        <h1>{forecast.hourly ?forecast.hourly.data[1].precipProbability:0.0}</h1>
+        <h1>{forecast.hourly ?forecast.hourly.data[1].precipProbability * 100:0.0}%</h1>
         <p className="label">Next Hour</p>
         </div>
         <div className="forecastCard">
-        <h1>{forecast.daily ?forecast.daily.data[1].precipProbability:0.0}</h1>
+        <h1>{forecast.daily ?forecast.daily.data[1].precipProbability * 100 :0.0}%</h1>
         <p className="label">Tomorrow</p>
         </div>
       </section>
