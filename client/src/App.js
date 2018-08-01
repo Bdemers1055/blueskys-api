@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import moment from 'moment';
 
 class App extends Component {
     constructor(props) {
@@ -69,10 +69,11 @@ class App extends Component {
   render() {
     const styles = { display: this.state.appearance };
     const { forecast } = this.state;
+    // const nexthour = {(forecast.hourly.data[0].time)};
+    const date = moment(nexthour);
     return (
       <div className="App">
         <header className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <h1 className="App-title">Check the propability of rain in your area</h1>
           <input className="address" 
                type="text"
@@ -85,15 +86,16 @@ class App extends Component {
         <h1 className="App-title">Chances of Rain</h1>
         <div className="forecastCard">
         <h1>{forecast.currently ?forecast.currently.precipProbability * 100 :0.0}%</h1>
-        <p className="label">Current</p>
+        <p className="label">Currently</p>
         </div>
         
         <div className="forecastCard">
-        <h1>{forecast.hourly ?forecast.hourly.data[1].precipProbability * 100:0.0}%</h1>
-        <p className="label">Next Hour</p>
+        <h1>{forecast.hourly ?forecast.hourly.data[0].precipProbability * 100:0.0}%</h1>
+        {/* <p className="label">{forecast.hourly ?forecast.hourly.data[0].time * 1000:null}</p> */}
+        <p className="label">{date.format("ddd, hA")}</p>
         </div>
         <div className="forecastCard">
-        <h1>{forecast.daily ?forecast.daily.data[1].precipProbability * 100 :0.0}%</h1>
+        <h1>{forecast.daily ?forecast.daily.data[0].precipProbability * 100 :0.0}%</h1>
         <p className="label">Tomorrow</p>
         </div>
       </section>
